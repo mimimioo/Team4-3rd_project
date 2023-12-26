@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
+import LoginBox from "../components/LoginPageItems/LoginBox";
+import BackgroundVideo from "../components/BackgroundVideo";
 
 
 
 const LoginPage = () => {
     return (
         <LoginPageLayout>
-            테스트입니다.
+            <BackgroundVideo />
+            <LoginBox />
         </LoginPageLayout>
     );
 };
