@@ -26,7 +26,7 @@ const kakaoButtonConfig = {
     imageAddress: "./symbol/kakao_symbol.png",
     styles: {
         bgcColor: "#FEE500",
-        textColor: "#fff",
+        textColor: "#191919",
         activeBgcColor : "#d9c200"
     }
 }
