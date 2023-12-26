@@ -37,6 +37,7 @@ public class SecurityConfig {
         // 실제로는 <보안 설정 객체>에 건네준 각종 <메서드>, <인자>는 해당 객체에 내부적으로 저장되며,
         // <저장된 상태값>들은 <Spring Security>에서 내부적으로 처리되어 보안 구성이 완성된다.
         http
+                // 브라우저의 SOP 정책의 해결책으로 서버에서 CORS를 설정함
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
                 // csrf()를 호출하면, 메서드 내부에서 CsrfConfigurer(csrf 설정 객체)를 생성, 반환한다.
                 // 정확히는 CsrfConfigurer<HttpSecurity>()
