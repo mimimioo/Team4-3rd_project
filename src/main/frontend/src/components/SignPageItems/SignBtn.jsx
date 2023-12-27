@@ -2,10 +2,10 @@ import React from 'react';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-const SignBtn = ({to, children}) => {
+const SignBtn = (props) => {
     return (
-        <Btn to={to}>
-            {children}
+        <Btn to={props.to}>
+            {props.children}
         </Btn>
     );
 };
