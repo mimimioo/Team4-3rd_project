@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-const SignWrapper = ({children}) => {
+const SignBoxWrapper = ({children}) => {
     return (
         <Wrapper>
             {children}
@@ -9,7 +9,7 @@ const SignWrapper = ({children}) => {
     );
 };
 
-export default SignWrapper;
+export default SignBoxWrapper;
 
 const Wrapper = styled.div`
   display: flex;

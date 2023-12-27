@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import InputBox from "./InputBox";
 import OAuth2Btn from "./OAuth2Btn";
-import SignWrapper from "./SignWrapper";
+import SignBoxWrapper from "./SignBoxWrapper";
 import SignBtn from "./SignBtn";
 
 const googleButtonConfig = {
@@ -34,7 +34,7 @@ const kakaoButtonConfig = {
 }
 const SignInBox = () => {
     return (
-        <SignWrapper>
+        <SignBoxWrapper>
             <h1 style={{marginTop: "0"}}>로그인</h1>
             <InputBox message={"아이디를 입력해주세요."}/>
             <InputBox message={"패스워드를 입력해주세요."}/>
@@ -44,7 +44,7 @@ const SignInBox = () => {
             <OAuth2Btn config={googleButtonConfig}></OAuth2Btn>
             <OAuth2Btn config={naverButtonConfig}></OAuth2Btn>
             <OAuth2Btn config={kakaoButtonConfig}></OAuth2Btn>
-        </SignWrapper>
+        </SignBoxWrapper>
     );
 };
 
