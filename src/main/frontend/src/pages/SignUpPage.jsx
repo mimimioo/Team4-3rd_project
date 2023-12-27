@@ -1,7 +1,7 @@
 import React from 'react';
 import BackgroundVideo from "../components/BackgroundVideo";
-import SignPageLayout from "../components/LoginPageItems/SignPageLayout";
-import LoginBox from "../components/LoginPageItems/LoginBox";
+import SignPageLayout from "../components/SignPageItems/SignPageLayout";
+import SignUpBox from "../components/SignPageItems/SignUpBox";
 
 const SignUpPage = () => {
     return (
