@@ -1,6 +1,6 @@
 import React from 'react';
-import SignBoxWrapper from "./SignBoxWrapper";
 import InputBox from "./InputBox";
+import SignBoxWrapper from "./SignBoxWrapper";
 import SignBtn from "./SignBtn";
 
 const SignUpBox = () => {

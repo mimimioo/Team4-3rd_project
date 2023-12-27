@@ -34,6 +34,7 @@ const Button = styled.button`
   padding: 10px 19%;
   border-radius: 10px;
   transition: 0.3s ease;
+  white-space: nowrap;
 
   &:active {
     background-color: ${(props) => props.$styles.activeBgcColor};
