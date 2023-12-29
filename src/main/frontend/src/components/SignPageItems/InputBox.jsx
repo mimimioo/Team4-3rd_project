@@ -56,7 +56,11 @@ const InputBox = (props) => {
 
     return (
         <InputWrapper>
-            <Input onChange={setInputData} onFocus={setInputData} onBlur={setInputData} style={inputDynamicStyle}/>
+            <Input
+                type={props.type==='pw'? "password" : "text"}
+                onChange={setInputData} onFocus={setInputData}
+                onBlur={setInputData}
+                style={inputDynamicStyle}/>
             <InputText style={inputDynamicTextStyle}>{props.message}</InputText>
         </InputWrapper>
     );
