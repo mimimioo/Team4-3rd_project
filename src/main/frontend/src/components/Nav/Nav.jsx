@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import LoginContext from "../../context/user/LoginContext";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -40,18 +41,29 @@ const StyledLink = styled(Link)`
 
 
 const Nav = () => {
+
+    const {isLogin, dispatchLogin} = useContext(LoginContext);
+
     return (
         <StyledNav>
           <StyledLinkContainer>
+<<<<<<< HEAD
             <StyledLink href="#">선상예약</StyledLink>
             <StyledLink href="#">커뮤니티</StyledLink>
             <StyledLink to={"/UsedMarket"}>중고마켓</StyledLink>
             <StyledLink href="#">공지사항</StyledLink>
+=======
+            <StyledLink to="#">선상예약</StyledLink>
+            <StyledLink to="/Community">커뮤니티</StyledLink>
+            <StyledLink to="#">중고마켓</StyledLink>
+            <StyledLink to="#">공지사항</StyledLink>
+>>>>>>> c468337f0e4faaa0e213e7c16282707765d35ef0
           </StyledLinkContainer>
-          <StyledText>낚시의민족낚았소</StyledText>
-          <StyledLinkContainer>
-            <StyledLink href="#">낚시터찾기</StyledLink>
-            <StyledLink to={"/login"}>로그인</StyledLink>
+            <StyledText>낚시의민족낚았소</StyledText>
+            <StyledLinkContainer>
+            <StyledLink to="#">낚시터찾기</StyledLink>
+            {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
+            {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
           </StyledLinkContainer>
         </StyledNav>
     );
