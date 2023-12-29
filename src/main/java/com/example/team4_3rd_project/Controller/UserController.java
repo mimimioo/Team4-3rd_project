@@ -22,6 +22,8 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultDto registerUser(@RequestBody UserDto userForm) {
+        System.out.println("회원가입 컨트롤러");
+        System.out.println(userForm.getEmail());
         ResultDto resultDto = new ResultDto();
         UserEntity user = UserEntity.createUser(userForm, passwordEncoder);
 

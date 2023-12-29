@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.example.team4_3rd_project.Utils.JwtTokenUtil.generateToken;
@@ -27,6 +28,7 @@ public class UserService implements UserDetailsService {
         Optional<UserEntity> findUser = userRepository.findByEmail(user.getEmail());
         UserEntity userInfo = findUser.orElse(null);
         if(userInfo != null){
+            System.out.println(Objects.requireNonNull(userInfo).getUsername());
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
     }

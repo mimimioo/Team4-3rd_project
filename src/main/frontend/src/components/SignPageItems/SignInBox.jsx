@@ -35,6 +35,7 @@ const kakaoButtonConfig = {
 const SignInBox = () => {
     const [userID, setUserID] = useState('');
     const [userPW, setUserPW] = useState('');
+    const [result, setResult] = useState('');
 
     const handleInput = (type, data) => {
         if (type === 'id') {
@@ -54,7 +55,7 @@ const SignInBox = () => {
             <h1 style={{marginTop: "0"}}>로그인</h1>
             <InputBox message={"아이디를 입력해주세요."} type={"id"} onDataFromInput={handleInput}/>
             <InputBox message={"패스워드를 입력해주세요."} type={"pw"} onDataFromInput={handleInput}/>
-            <SignBtn to={null}>로그인</SignBtn>
+            <SignBtn request={"signIn"} id={userID} pw={userPW} result={setResult}>로그인</SignBtn>
             <SignBtn to={"/Signup"}>회원가입</SignBtn>
             <Line></Line>
             <OAuth2Btn config={googleButtonConfig}></OAuth2Btn>
