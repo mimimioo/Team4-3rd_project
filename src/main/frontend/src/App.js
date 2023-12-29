@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/user/AuthProvider";
 import LoginProvider from "./provider/user/LoginProvider";
 import UserProvider from "./provider/user/UserProvider";
+import Logout from "./components/SignPageItems/Logout";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path="/test" element={<Test />}></Route>
                         <Route path="/login" element={<SignInPage />}></Route>
                         <Route path="/signup" element={<SignUpPage />}></Route>
+                        <Route path="/logout" element={<Logout />}></Route>
                     </Routes>
                 </UserProvider>
             </LoginProvider>

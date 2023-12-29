@@ -7,14 +7,14 @@ import LoginContext from "../../context/user/LoginContext";
 import UserContext from "../../context/user/UserContext";
 
 const SignBtn = (props) => {
-    const {token, setToken} = useContext(AuthContext);
-    const {isLogin, setIsLogin} = useContext(LoginContext);
-    const {userInfo, setUserInfo} = useContext(UserContext);
+    const {token, dispatchToken} = useContext(AuthContext);
+    const {isLogin, dispatchLogin} = useContext(LoginContext);
+    const {userInfo, dispatchUserInfo} = useContext(UserContext);
     const navigate = useNavigate();
     let requestFun;
     if(props.request === "signIn")
     {
-        requestFun = async () => {props.result(await requestSignIn(props.id, props.pw, setToken, setIsLogin,setUserInfo))}
+        requestFun = async () => {props.result(await requestSignIn(props.id, props.pw, dispatchToken, dispatchLogin,dispatchUserInfo))}
         console.log(token);
         console.log(isLogin);
         console.log(userInfo);
@@ -30,11 +30,14 @@ const SignBtn = (props) => {
             });
             console.log('Login Successful', response.data);
             setToken(response.data.token);
-            setIsLogin(true);
-            setUserInfo({
+            dispatchLogin({type : "LOGIN"});
+            dispatchUserInfo({
+                type : "LOGIN",
+                userInfo : {
                 userName: response.data.userDto.username,
                 userEmail: response.data.userDto.email,
                 userPhone: response.data.userDto.phoneNum,
+                }
             })
             navigate('/');
             return response.data;

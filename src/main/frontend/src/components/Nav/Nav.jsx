@@ -3,6 +3,7 @@ import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import LoginContext from "../../context/user/LoginContext";
+import Logout from "../SignPageItems/Logout";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -55,6 +56,7 @@ const Nav = () => {
           <StyledLinkContainer>
             <StyledLink to="#">낚시터찾기</StyledLink>
               {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
+              {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : null}
           </StyledLinkContainer>
         </StyledNav>
     );
