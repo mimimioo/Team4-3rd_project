@@ -44,7 +44,7 @@ const Nav = () => {
         <StyledNav>
           <StyledLinkContainer>
             <StyledLink href="#">선상예약</StyledLink>
-            <StyledLink href="#">커뮤니티</StyledLink>
+            <StyledLink to="/Community">커뮤니티</StyledLink>
             <StyledLink href="#">중고마켓</StyledLink>
             <StyledLink href="#">공지사항</StyledLink>
           </StyledLinkContainer>
