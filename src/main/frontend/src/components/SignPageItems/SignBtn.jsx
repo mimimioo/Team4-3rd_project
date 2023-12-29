@@ -29,7 +29,10 @@ const SignBtn = (props) => {
                 password : pw,
             });
             console.log('Login Successful', response.data);
-            setToken(response.data.token);
+            dispatchToken({
+                type : "LOGIN",
+                token : response.data.token
+            })
             dispatchLogin({type : "LOGIN"});
             dispatchUserInfo({
                 type : "LOGIN",
@@ -42,6 +45,7 @@ const SignBtn = (props) => {
             navigate('/');
             return response.data;
         } catch (error) {
+            alert("아이디와 비밀번호를 다시 확인해주세요.")
             console.error('Login Failed', error);
             return null;
         }

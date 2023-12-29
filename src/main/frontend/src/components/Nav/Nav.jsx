@@ -40,6 +40,9 @@ const StyledLink = styled(Link)`
 
 
 const Nav = () => {
+
+    const {isLogin, dispatchLogin} = useContext(LoginContext);
+
     return (
         <StyledNav>
           <StyledLinkContainer>
@@ -48,10 +51,11 @@ const Nav = () => {
             <StyledLink href="#">중고마켓</StyledLink>
             <StyledLink href="#">공지사항</StyledLink>
           </StyledLinkContainer>
-          <StyledText>낚시의민족낚았소</StyledText>
-          <StyledLinkContainer>
-            <StyledLink href="#">낚시터찾기</StyledLink>
-            <StyledLink to={"/login"}>로그인</StyledLink>
+            <StyledText>낚시의민족낚았소</StyledText>
+            <StyledLinkContainer>
+            <StyledLink to="#">낚시터찾기</StyledLink>
+            {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
+            {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
           </StyledLinkContainer>
         </StyledNav>
     );
