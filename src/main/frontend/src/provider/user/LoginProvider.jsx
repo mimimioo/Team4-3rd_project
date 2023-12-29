@@ -15,7 +15,10 @@ const loginReducer = (state, action) => {
 };
 
 const LoginProvider = ({children}) => {
-    const [isLogin, dispatchLogin] = useReducer(loginReducer, localStorage.getItem("isLogin")==="true" || false);
+    const [isLogin, dispatchLogin] = useReducer(
+        loginReducer,
+        localStorage.getItem("isLogin")==="true" || false
+    );
 
     return (
         <LoginContext.Provider value={{isLogin, dispatchLogin}}>

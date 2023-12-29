@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import LoginContext from "../../context/user/LoginContext";
 
 const StyledNav = styled.nav`
   position: relative;
@@ -46,10 +47,10 @@ const Nav = () => {
     return (
         <StyledNav>
           <StyledLinkContainer>
-            <StyledLink href="#">선상예약</StyledLink>
+            <StyledLink to="#">선상예약</StyledLink>
             <StyledLink to="/Community">커뮤니티</StyledLink>
-            <StyledLink href="#">중고마켓</StyledLink>
-            <StyledLink href="#">공지사항</StyledLink>
+            <StyledLink to="#">중고마켓</StyledLink>
+            <StyledLink to="#">공지사항</StyledLink>
           </StyledLinkContainer>
             <StyledText>낚시의민족낚았소</StyledText>
             <StyledLinkContainer>

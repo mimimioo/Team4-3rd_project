@@ -4,18 +4,31 @@ import Main from "./pages/MainPage";
 import Community from "./pages/Community";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import AuthContext from "./context/user/AuthContext";
+import AuthProvider from "./provider/user/AuthProvider";
+import LoginContext from "./context/user/LoginContext";
+import LoginProvider from "./provider/user/LoginProvider";
+import UserProvider from "./provider/user/UserProvider";
 
 function App() {
+
   return (
     <div className="App">
-        <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/main" element={<Main />}></Route>
-            <Route path="/test" element={<Test />}></Route>
-            <Route path="/Community" element={<Community />}></Route>
-            <Route path="/login" element={<SignInPage />}></Route>
-            <Route path="/signup" element={<SignUpPage />}></Route>
-        </Routes>
+        <LoginProvider>
+            <UserProvider>
+                <AuthProvider>
+                    <Routes>
+                        <Route path="/" element={<Main />}></Route>
+                        <Route path="/main" element={<Main />}></Route>
+                        <Route path="/test" element={<Test />}></Route>
+                        <Route path="/Community" element={<Community />}></Route>
+                        <Route path="/login" element={<SignInPage />}></Route>
+                        <Route path="/signup" element={<SignUpPage />}></Route>
+                    </Routes>
+                </AuthProvider>
+            </UserProvider>
+        </LoginProvider>
+
     </div>
   );
 }
