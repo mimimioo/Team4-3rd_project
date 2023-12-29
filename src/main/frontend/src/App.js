@@ -3,6 +3,7 @@ import Test from "./components/Test";
 import Main from "./pages/MainPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import UsedMarket from "./pages/UsedMarket";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/test" element={<Test />}></Route>
             <Route path="/login" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/usedmarket" element={<UsedMarket />}></Route>
         </Routes>
     </div>
   );
