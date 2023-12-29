@@ -4,10 +4,14 @@ import UserContext from "../../context/user/UserContext";
 const userReducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN':
-            localStorage.setItem("userInfo", action.userInfo)
-            return true;
+            localStorage.setItem("userName", action.userInfo.userName);
+            localStorage.setItem("userEmail", action.userInfo.userEmail);
+            localStorage.setItem("userPhone", action.userInfo.userPhone);
+            return action.userInfo;
         case 'LOGOUT':
-            localStorage.removeItem("userInfo")
+            localStorage.removeItem("userInfo");
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("userPhone");
             return false;
         default:
             return state;
@@ -20,7 +24,7 @@ const UserProvider = ({children}) => {
         userEmail: '',
         userPhone: '',
     };
-    const [userInfo, dispatchUserInfo] = useReducer(userReducer, localStorage.getItem("userInfo") || initialData);
+    const [userInfo, dispatchUserInfo] = useReducer(userReducer, localStorage.getItem("userName") || initialData);
 
     return (
         <UserContext.Provider value={{userInfo, dispatchUserInfo}}>
