@@ -7,7 +7,7 @@ const InputBox = (props) => {
         boxShadow: "none"
     };
     const inputBasicTextStyle = {
-        left: "0",
+        left: "15px",
         top: "50%",
         transform: "translateY(-50%)",
         color: "#aaa",
@@ -15,10 +15,10 @@ const InputBox = (props) => {
     };
     const inputStyle = {
         border: "1px solid rgba(0, 0, 0, 0)",
-        boxShadow: "0 0 3px 2px dodgerblue"
+        boxShadow: "0 0 4px 1px dodgerblue"
     };
     const inputTextStyle = {
-        left: "5px",
+        left: "15px",
         top: "-15%",
         transform: "translateY(0)",
         color: "dodgerblue",
@@ -26,10 +26,10 @@ const InputBox = (props) => {
     };
     const inputBlurStyle = {
         border: "1px solid #aaa",
-        boxShadow: "0 0 3px 2px #aaa"
+        boxShadow: "0 0 4px 1px #aaa"
     };
     const inputBlurTextStyle = {
-        left: "5px",
+        left: "15px",
         top: "-15%",
         transform: "translateY(0)",
         color: "#aaa",
@@ -65,12 +65,12 @@ const InputBox = (props) => {
         </InputWrapper>
     );
 };
-export default InputBox;
+export default React.memo(InputBox);
 
 const InputWrapper = styled.div`
     position: relative;
     margin: 0 auto 20px;
-    width: 70%;
+    width: 75%;
     text-align: center;
     max-width: 350px;
 `
@@ -84,15 +84,9 @@ const Input = styled.input`
   transition: 0.5s ease;
 `
 const InputText = styled.div`
-    color: #aaa;
     position: absolute;
     background-color: #fff;
     border-radius: 3px;
-    padding: 1px;
-    z-index: 10;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
     pointer-events: none;
     margin-left: 10px;
     transition: 0.5s ease;

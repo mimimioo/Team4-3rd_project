@@ -9,7 +9,7 @@ const userReducer = (state, action) => {
             localStorage.setItem("userPhone", action.userInfo.userPhone);
             return action.userInfo;
         case 'LOGOUT':
-            localStorage.removeItem("userInfo");
+            localStorage.removeItem("userName");
             localStorage.removeItem("userEmail");
             localStorage.removeItem("userPhone");
             return false;

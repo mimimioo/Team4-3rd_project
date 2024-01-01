@@ -15,14 +15,12 @@ const SignBtn = (props) => {
     if(props.request === "signIn")
     {
         requestFun = async () => {props.result(await requestSignIn(props.id, props.pw, dispatchToken, dispatchLogin,dispatchUserInfo))}
-        console.log(token);
-        console.log(isLogin);
-        console.log(userInfo);
     }
     else if(props.request === "signUp")
         requestFun = async () => {props.result(await requestSignUp(props.id, props.pw, props.cpw))}
 
     const  requestSignIn = async (id, pw, setToken, setIsLogin, setUserInfo) => {
+        console.log("비동기 함수 실행")
         try {
             const response = await axios.post('http://192.168.85.252:8080/user/login', {
                 email : id,
@@ -42,7 +40,7 @@ const SignBtn = (props) => {
                 userPhone: response.data.userDto.phoneNum,
                 }
             })
-            navigate('/');
+            navigate(-1);
             return response.data;
         } catch (error) {
             alert("아이디와 비밀번호를 다시 확인해주세요.")

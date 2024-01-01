@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import AuthContext from "../../context/user/AuthContext";
 import LoginContext from "../../context/user/LoginContext";
 import UserContext from "../../context/user/UserContext";
@@ -11,15 +11,14 @@ const Logout = () => {
     const {userInfo, dispatchUserInfo} = useContext(UserContext);
     const navigate = useNavigate();
 
-    const logoutFun = () => {
-        dispatchToken({type : "LOGOUT"});
-        dispatchLogin({type : "LOGOUT"})
-        dispatchUserInfo({type : "LOGOUT"})
+    useEffect(() => {
+            dispatchToken({type : "LOGOUT"});
+            dispatchLogin({type : "LOGOUT"})
+            dispatchUserInfo({type : "LOGOUT"})
+            navigate("/")
+    }, []);
 
-        navigate("/")
-    }
-
-    return logoutFun();
+    return '';
 };
 
 export default Logout;
