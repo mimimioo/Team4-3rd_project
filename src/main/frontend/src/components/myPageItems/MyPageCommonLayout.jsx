@@ -5,12 +5,12 @@ const MyPageCommonLayout = (props) => {
     return (
         <Layout>
             {/*props.currentMenu 값은 컴포넌트이고, 메뉴에 따라 다른 컴포넌트를 렌더링함.*/}
-            {props.currentMenu}
+            <props.currentMenu />
         </Layout>
     );
 };
 
-export default React.memo(MyPageCommonLayout);
+export default MyPageCommonLayout;
 
 const Layout = styled.div`
   width: 90%;
@@ -18,5 +18,4 @@ const Layout = styled.div`
   background-color: #fff;
   border-radius: 50px;
   padding: 5%;
-  height: 1000px;
 `

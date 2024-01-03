@@ -20,7 +20,9 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
     private String password;
+    private String nickname;
     private String phoneNum;
+    private String userIntroduce;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -31,6 +33,8 @@ public class UserEntity {
         String password = passwordEncoder.encode(userDto.getPassword());
         userEntity.setPassword(password);
         userEntity.setPhoneNum(userDto.getPhoneNum());
+        userEntity.setNickname(userDto.getNickname());
+        userEntity.setUserIntroduce(null);
         userEntity.setRole(Role.USER);
         return userEntity;
     }

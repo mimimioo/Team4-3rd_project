@@ -49,14 +49,11 @@ public class UserService implements UserDetailsService {
 
         // 유저가 존재하고, 패스워드가 같다면..
         if(user != null && passwordEncoder.matches(userEntity.getPassword(), user.getPassword())) {
-            System.out.println("로그인 성공");
             // 토큰 생성
             resultDto.setToken("Bearer " + generateToken(user.getEmail()));
             resultDto.setResult(true);
-            resultDto.setMessage("로그인 성공");
             // resultDto 내부 UserDto 설정
             resultDto.setUserDto(UserEntity.changeToDto(user));
-            resultDto.userDto.setPhoneNum(null);
             resultDto.userDto.setPassword(null);
         } else {
             System.out.println("로그인 실패");

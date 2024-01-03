@@ -57,7 +57,7 @@ const InputBox = (props) => {
     return (
         <InputWrapper>
             <Input
-                type={props.type==='pw'? "password" : "text"}
+                type={props.type==='pw' || props.type==='cpw'? "password" : "text"}
                 onChange={setInputData} onFocus={setInputData}
                 onBlur={setInputData}
                 style={inputDynamicStyle}/>

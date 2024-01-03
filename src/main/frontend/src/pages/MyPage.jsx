@@ -11,8 +11,10 @@ import LoginContext from "../context/user/LoginContext";
 import {useNavigate} from "react-router-dom";
 
 const MyPage = () => {
-    const navigate = useNavigate();
     const {isLogin, dispatchLogin} = useContext(LoginContext);
+    const navigate = useNavigate();
+    const manus = ['내 정보 관리', '게시물 관리', '예약 관리', '관심글 보기'];
+    const [currentMenu, setCurrentMenu] = useState(() => MyInfo);
 
     useEffect(() => {
         if(isLogin === false) {
@@ -20,24 +22,23 @@ const MyPage = () => {
             navigate("/login")
         }
     }, [isLogin]);
-    const manus = ['내 정보 관리', '게시물 관리', '예약 관리', '관심글 보기'];
-    const [currentMenu, setCurrentMenu] = useState(MyInfo);
+
     const showMenu = (index) => {
         switch (index) {
             case 0 :
-                setCurrentMenu(MyInfo);
+                setCurrentMenu(() => MyInfo);
                 break;
             case 1 :
-                setCurrentMenu(MyBoard);
+                setCurrentMenu(() => MyBoard);
                 break;
             case 2 :
-                setCurrentMenu(MyRes);
+                setCurrentMenu(() => MyRes);
                 break;
             case 3 :
-                setCurrentMenu(MyLike);
+                setCurrentMenu(() => MyLike);
                 break;
             default :
-                setCurrentMenu(MyInfo);
+                setCurrentMenu(() => MyInfo);
         }
     }
     return (

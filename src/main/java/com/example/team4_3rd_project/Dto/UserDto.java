@@ -11,7 +11,9 @@ public class UserDto {
     private String username;
     private String email;
     private String password;
+    private String nickname;
     private String phoneNum;
+    private String userIntroduce;
 
     public static UserEntity changeToEntity(UserDto userDto) {
         ModelMapper modelMapper = new ModelMapper();
