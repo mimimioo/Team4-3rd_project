@@ -7,7 +7,6 @@ import UsedBoard from '../components/UsedMarket/UsedBoard';
 const UsedMarket = () => {
     return (
         <div>
-
             <Nav/>
             <UsedBoard/>
         </div>  
