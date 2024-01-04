@@ -15,14 +15,12 @@ const SignBtn = (props) => {
     if(props.request === "signIn")
     {
         requestFun = async () => {props.result(await requestSignIn(props.id, props.pw, dispatchToken, dispatchLogin,dispatchUserInfo))}
-        console.log(token);
-        console.log(isLogin);
-        console.log(userInfo);
     }
     else if(props.request === "signUp")
-        requestFun = async () => {props.result(await requestSignUp(props.id, props.pw, props.cpw))}
+        requestFun = async () => {props.result(await requestSignUp(props.id, props.pw, props.cpw, props.name, props.nickName, props.phoneNum))}
 
     const  requestSignIn = async (id, pw, setToken, setIsLogin, setUserInfo) => {
+        console.log("비동기 함수 실행")
         try {
             const response = await axios.post('http://192.168.85.252:8080/user/login', {
                 email : id,
@@ -37,12 +35,14 @@ const SignBtn = (props) => {
             dispatchUserInfo({
                 type : "LOGIN",
                 userInfo : {
-                userName: response.data.userDto.username,
-                userEmail: response.data.userDto.email,
-                userPhone: response.data.userDto.phoneNum,
+                    userName: response.data.userDto.username,
+                    userEmail: response.data.userDto.email,
+                    userPhone: response.data.userDto.phoneNum,
+                    userNickname: response.data.userDto.nickname,
+                    userIntroduce: response.data.userDto.userIntroduce
                 }
             })
-            navigate('/');
+            navigate(-1);
             return response.data;
         } catch (error) {
             alert("아이디와 비밀번호를 다시 확인해주세요.")
@@ -50,23 +50,32 @@ const SignBtn = (props) => {
             return null;
         }
     }
-    const  requestSignUp = async (id, pw, cpw) => {
+    const  requestSignUp = async (id, pw, cpw, name, nickName, phoneNum) => {
         if(pw !== cpw)
             return "패스워드가 일치하지 않습니다.";
+        else if(id==='' || pw==='' || name==='' || nickName==='') {
+            return "모든 입력값은 필수입니다.";
+        }
         else
             try {
                 console.log(`요청 전 데이터 확인, 아이디 : ${id} + 비밀번호 : ${pw}`)
                 const response = await axios.post('http://192.168.85.252:8080/user/register', {
                     email : id,
                     password : pw,
+                    username : name,
+                    nickname : nickName,
+                    phoneNum: phoneNum
                 });
                 const result = response.data? response.data : null;
                 console.log('Login Successful', result);
                 navigate('/login');
                 return result;
             } catch (error) {
+                const result = {
+                    message : "회원가입에 실패했습니다."
+                }
                 console.error('Login Failed', error);
-                return null;
+                return result;
             }
     }
 

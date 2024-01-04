@@ -42,9 +42,6 @@ public class UserController {
         UserEntity user = UserDto.changeToEntity(userForm);
 
         ResultDto resultDto = userService.loginUser(user);
-        System.out.println(resultDto.getToken());
-        System.out.println(resultDto.userDto.getEmail());
-        System.out.println(resultDto.getUserDto().getUsername());
 
         return resultDto;
     }
