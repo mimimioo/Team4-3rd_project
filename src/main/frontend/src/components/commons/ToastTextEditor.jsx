@@ -23,7 +23,7 @@
           
           // 2. 업로드 상태 모니터링
           uploadTask.on(  
-            'state_changed',
+            'state_changed',  
             (snapshot) => {
               // 업로드 중인 경우 실행되는 코드
               const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -50,7 +50,7 @@
 
       const editor = new Editor({
         el: document.querySelector('#editor'),
-        height: '400px',
+        height: '500px',
         initialEditType: 'wysiwyg',
         previewStyle: 'vertical',
         placeholder: '텍스트를 입력하세요.',

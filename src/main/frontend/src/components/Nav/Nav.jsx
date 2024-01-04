@@ -55,27 +55,11 @@ const Nav = () => {
     const {isLogin, dispatchLogin} = useContext(LoginContext);
 
     return (
-<<<<<<< HEAD
-      <StyledNav>
-      <StyledLinkContainer>
-        <StyledLink to="#">선상예약</StyledLink>
-        <StyledLink to="/Community">커뮤니티</StyledLink>
-        <StyledLink to="/UsedMarket">중고마켓</StyledLink>
-        <StyledLink to="#">공지사항</StyledLink>
-      </StyledLinkContainer>
-        <StyledText>낚시의민족낚았소</StyledText>
-        <StyledLinkContainer>
-        <StyledLink to="#">낚시터찾기</StyledLink>
-        {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
-        {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
-      </StyledLinkContainer>
-    </StyledNav>
-=======
         <StyledNav>
           <StyledLinkContainerLeft>
             <StyledLink to="#">선상예약</StyledLink>
             <StyledLink to="/Community">커뮤니티</StyledLink>
-            <StyledLink to="#">중고마켓</StyledLink>
+            <StyledLink to="/UsedMarket">중고마켓</StyledLink>
             <StyledLink to="#">공지사항</StyledLink>
           </StyledLinkContainerLeft>
             <StyledText to={"/"}>낚시의민족낚았소</StyledText>
@@ -85,7 +69,6 @@ const Nav = () => {
                 {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
           </StyledLinkContainerRight>
         </StyledNav>
->>>>>>> de231d2d0195aa0ececb68b92799de5b6f660bb8
     );
 };
 

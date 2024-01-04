@@ -1,9 +1,7 @@
-
-
+import { getStorage, ref } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
-import { getStorage } from 'firebase/storage';
 
-const firebaseconfig = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
@@ -14,5 +12,11 @@ const firebaseconfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-export const app = initializeApp(firebaseconfig);
+// Firebase 초기화
+export const app = initializeApp(firebaseConfig);
+
+// Firebase Storage 초기화
 export const storage = getStorage(app);
+
+// Storage에 대한 기본 참조 생성
+export const storageRef = ref(storage);
