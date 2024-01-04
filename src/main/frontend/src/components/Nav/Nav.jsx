@@ -59,7 +59,7 @@ const Nav = () => {
           <StyledLinkContainerLeft>
             <StyledLink to="#">선상예약</StyledLink>
             <StyledLink to="/Community">커뮤니티</StyledLink>
-            <StyledLink to="#">중고마켓</StyledLink>
+            <StyledLink to="/UsedMarket">중고마켓</StyledLink>
             <StyledLink to="#">공지사항</StyledLink>
           </StyledLinkContainerLeft>
             <StyledText to={"/"}>낚시의민족낚았소</StyledText>

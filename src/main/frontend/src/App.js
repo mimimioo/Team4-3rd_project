@@ -4,6 +4,7 @@ import Main from "./pages/MainPage";
 import Community from "./pages/Community";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import UsedMarket from "./pages/UsedMarket";
 import AuthProvider from "./provider/user/AuthProvider";
 import LoginProvider from "./provider/user/LoginProvider";
 import UserProvider from "./provider/user/UserProvider";
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/signup" element={<SignUpPage />}></Route>
                         <Route path="/logout" element={<Logout />}></Route>
                         <Route path="/mypage" element={<MyPage />}></Route>
+                        <Route path="/usedmarket" element={<UsedMarket />}></Route>
                     </Routes>
                 </AuthProvider>
             </UserProvider>
