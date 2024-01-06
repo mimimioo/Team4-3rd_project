@@ -16,12 +16,12 @@ const ProfileModal = () => {
                     <ColumnBox>
                         <Text>{userInfo.userName}님 반갑습니다.</Text>
                         <Text>닉네임</Text>
-                        <Input type={"text"} name={"NickName"} value={userInfo.userNickname}/>
+                        <Input type={"text"} name={"NickName"} defaultValue={userInfo.userNickname || ""} />
                     </ColumnBox>
                 </RowBox>
                 <ColumnBox>
                     <Text>소개글</Text>
-                    <TextArea value={userInfo.userIntroduce===''||"프로필 인사말을 작성해보세요!"}></TextArea>
+                    <TextArea defaultValue={userInfo.userIntroduce || ""} />
                     <Btn>수정하기</Btn>
                 </ColumnBox>
             </EditForm>

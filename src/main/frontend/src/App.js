@@ -5,9 +5,8 @@ import Community from "./pages/Community";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import UsedMarket from "./pages/UsedMarket";
-import AuthProvider from "./provider/user/AuthProvider";
-import LoginProvider from "./provider/user/LoginProvider";
-import UserProvider from "./provider/user/UserProvider";
+import LoginProvider from "./context/provider/user/LoginProvider";
+import UserProvider from "./context/provider/user/UserProvider";
 import Logout from "./components/SignPageItems/Logout";
 import MyPage from "./pages/MyPage";
 
@@ -17,7 +16,6 @@ function App() {
     <div className="App">
         <LoginProvider>
             <UserProvider>
-                <AuthProvider>
                     <Routes>
                         <Route path="/" element={<Main />}></Route>
                         <Route path="/main" element={<Main />}></Route>
@@ -29,7 +27,6 @@ function App() {
                         <Route path="/mypage" element={<MyPage />}></Route>
                         <Route path="/usedmarket" element={<UsedMarket />}></Route>
                     </Routes>
-                </AuthProvider>
             </UserProvider>
         </LoginProvider>
     </div>

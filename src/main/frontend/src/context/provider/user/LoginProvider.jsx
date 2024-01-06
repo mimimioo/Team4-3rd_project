@@ -1,5 +1,5 @@
-import React, {useReducer, useState} from 'react';
-import LoginContext from "../../context/user/LoginContext";
+import React, {useReducer} from 'react';
+import LoginContext from "../../user/LoginContext";
 
 const loginReducer = (state, action) => {
     switch (action.type) {
@@ -7,7 +7,7 @@ const loginReducer = (state, action) => {
             localStorage.setItem("isLogin", "true")
             return true;
         case 'LOGOUT':
-            localStorage.setItem("isLogin", "false")
+            localStorage.removeItem("isLogin")
             return false;
         default:
             return state;

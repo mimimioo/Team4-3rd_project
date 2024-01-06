@@ -53,7 +53,7 @@ public class SecurityConfig {
                 // 특정 URL 패턴에 대한 권한 설정을 하거나,
                 // 인증 여부를 확인하는 등의 보안 관련 설정을 정의할 수 있다.
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/user/login", "/user/register").permitAll()
+                        .requestMatchers("/user/login", "/user/register", "user/logout").permitAll()
                         .anyRequest().authenticated()
                 )
                 // 세션 설정 비활성화

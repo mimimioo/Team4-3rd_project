@@ -1,24 +1,37 @@
 import React, {useContext, useEffect} from 'react';
-import AuthContext from "../../context/user/AuthContext";
 import LoginContext from "../../context/user/LoginContext";
 import UserContext from "../../context/user/UserContext";
 import {Link, useNavigate} from "react-router-dom";
-import {type} from "@testing-library/user-event/dist/type";
+import axios from "axios";
+
 
 const Logout = () => {
-    const {token, dispatchToken} = useContext(AuthContext);
-    const {isLogin, dispatchLogin} = useContext(LoginContext);
-    const {userInfo, dispatchUserInfo} = useContext(UserContext);
+    const { isLogin, dispatchLogin } = useContext(LoginContext);
+    const { userInfo, dispatchUserInfo } = useContext(UserContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-            dispatchToken({type : "LOGOUT"});
-            dispatchLogin({type : "LOGOUT"})
-            dispatchUserInfo({type : "LOGOUT"})
-            navigate("/")
-    }, []);
+    const requestLogout = async () => {
+        try {
+            const response = await axios.post('http://192.168.85.252:8080/user/logout');
+            const result = response.data || "데이터가 비어있음";
+            if (result.result === true) {
+                dispatchUserInfo({ type: "LOGOUT" })
+                dispatchLogin({ type: "LOGOUT" })
+                navigate("/");
+            }
+        } catch (error) {
+            console.error('Logout Failed', error);
+        }
+    };
 
-    return '';
+    useEffect(() => {
+        if(isLogin) {
+            requestLogout();
+        } else {
+            navigate(-1);
+        }
+    }, []);
+    return null
 };
 
 export default Logout;

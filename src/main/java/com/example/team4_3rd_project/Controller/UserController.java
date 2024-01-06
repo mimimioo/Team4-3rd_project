@@ -4,6 +4,8 @@ import com.example.team4_3rd_project.Dto.ResultDto;
 import com.example.team4_3rd_project.Dto.UserDto;
 import com.example.team4_3rd_project.Entity.UserEntity;
 import com.example.team4_3rd_project.Service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.example.team4_3rd_project.Utils.JwtTokenUtil.generateToken;
 
 @RestController
 @RequestMapping("/user")
@@ -36,12 +40,42 @@ public class UserController {
         return resultDto;
     }
     @PostMapping("/login")
-    public ResultDto loginUser(@RequestBody UserDto userForm) {
+    public ResultDto loginUser(@RequestBody UserDto userForm, HttpServletResponse response) {
         System.out.println(userForm.getEmail());
         System.out.println(userForm.getPassword());
         UserEntity user = UserDto.changeToEntity(userForm);
 
         ResultDto resultDto = userService.loginUser(user);
+        if(resultDto.result) {
+            System.out.println("로그인 성공");
+            String token = "Bearer" + generateToken(user.getEmail());
+            System.out.println(token);
+
+            Cookie cookie = new Cookie("Authorization", token);
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(cookie);;
+        }
+        return resultDto;
+    }
+
+    @PostMapping("/logout")
+    public ResultDto logoutUser(HttpServletResponse response) {
+        ResultDto resultDto = new ResultDto();
+        resultDto.setResult(true);
+        resultDto.setMessage("로그아웃 하였습니다.");
+
+        Cookie cookie = new Cookie("Authorization", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return resultDto;
+    }
+
+    @PostMapping("info/update")
+    public ResultDto updateUser() {
+        ResultDto resultDto = new ResultDto();
+
 
         return resultDto;
     }
@@ -51,7 +85,6 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         ResultDto resultDto = new ResultDto();
         resultDto.setResult(true);
-        resultDto.setToken(authentication.getCredentials().toString());
         resultDto.setMessage("인증 페이지 요청 성공!");
         return resultDto;
     }

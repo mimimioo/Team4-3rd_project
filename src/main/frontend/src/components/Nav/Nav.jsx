@@ -1,5 +1,5 @@
 
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import LoginContext from "../../context/user/LoginContext";
@@ -51,8 +51,8 @@ const StyledLink = styled(Link)`
 
 
 const Nav = () => {
-
     const {isLogin, dispatchLogin} = useContext(LoginContext);
+    console.log(isLogin);
 
     return (
         <StyledNav>
@@ -66,7 +66,7 @@ const Nav = () => {
             <StyledLinkContainerRight>
                 <StyledLink to="#">낚시터찾기</StyledLink>
                 {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
-                {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
+                {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : null}
           </StyledLinkContainerRight>
         </StyledNav>
     );

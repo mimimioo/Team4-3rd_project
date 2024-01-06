@@ -16,6 +16,7 @@ const MyPage = () => {
     const manus = ['내 정보 관리', '게시물 관리', '예약 관리', '관심글 보기'];
     const [currentMenu, setCurrentMenu] = useState(() => MyInfo);
 
+
     useEffect(() => {
         if(isLogin === false) {
             alert("마이페이지는 로그인 후 접근 가능합니다.")

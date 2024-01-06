@@ -6,6 +6,7 @@ import BackgroundVideo from '../components/BackgroundVideo';
 import Nav from '../components/Nav/Nav';
 
 const Main = () => {
+
   return (
     <StyledContainer>
       <BackgroundVideo />

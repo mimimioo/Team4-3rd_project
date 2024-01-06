@@ -1,26 +1,28 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from "styled-components";
 import ProfileModal from "./modal/ProfileModal";
 import UserInfoModal from "./modal/UserInfoModal";
 import ModalBaseLayout from "./modal/ModalBaseLayout";
+import UserContext from "../../context/user/UserContext";
 
 
 const MyInfo = () => {
     const [currentModal, setCurrentModal] = useState(false);
+    const {userInfo, dispatchUserInfo} = useContext(UserContext);
 
     return (
         <Layout>
             <RowFlexLayout1>
                 <ProfileImage />
                 <ProfileInfoLayout>
-                    <ProfileHeader>닉네임 : nickname</ProfileHeader>
+                    <ProfileHeader>닉네임 : {userInfo.userNickname}</ProfileHeader>
                     <ProfileHeader>소개글</ProfileHeader>
-                    <ProfileText>소개글 : introduce</ProfileText>
+                    <ProfileText>{userInfo.userIntroduce || "프로필 인사말을 작성해보세요!"}</ProfileText>
                 </ProfileInfoLayout>
             </RowFlexLayout1>
             <RowFlexLayout2>
-                <ProfileUpdateBtn onClick={() => {setCurrentModal(ProfileModal)}}>프로필 수정</ProfileUpdateBtn>
-                <UserInfoUpdateBtn onClick={() => {setCurrentModal(UserInfoModal)}}>회원정보 관리</UserInfoUpdateBtn>
+                <ProfileUpdateBtn onClick={() => {setCurrentModal("ProfileModal")}}>프로필 수정</ProfileUpdateBtn>
+                <UserInfoUpdateBtn onClick={() => {setCurrentModal("UserInfoModal")}}>회원정보 관리</UserInfoUpdateBtn>
             </RowFlexLayout2>
             {currentModal && <ModalBaseLayout currentModal={currentModal} setCurrentModal={setCurrentModal} />}
         </Layout>
