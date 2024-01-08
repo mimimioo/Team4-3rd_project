@@ -7,11 +7,11 @@ import MyBoard from "../components/myPageItems/MyBoard";
 import MyRes from "../components/myPageItems/MyRes";
 import MyLike from "../components/myPageItems/MyLike";
 import Nav from "../components/Nav/Nav";
-import LoginContext from "../context/user/LoginContext";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const MyPage = () => {
-    const {isLogin, dispatchLogin} = useContext(LoginContext);
+    const isLogin = useSelector((state) => state.login.isLogin)
     const navigate = useNavigate();
     const manus = ['내 정보 관리', '게시물 관리', '예약 관리', '관심글 보기'];
     const [currentMenu, setCurrentMenu] = useState(() => MyInfo);

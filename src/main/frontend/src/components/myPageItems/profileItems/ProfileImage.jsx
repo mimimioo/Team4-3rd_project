@@ -1,13 +1,13 @@
 import React, {useContext, useRef, useState} from 'react';
 import styled from "styled-components";
-import UserContext from "../../../context/user/UserContext";
 import { uploadProfileImage } from '../../firebase/UploadImage';
+import {useSelector} from "react-redux";
 
 
 const ProfileImage = () => {
     const fileInputRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
-    const {userInfo, dispatchUserInfo} = useContext(UserContext);
+    const userInfo = useSelector(state => state.user)
     const [imageUrl, setImageUrl] = useState(null);
 
     const addImage = (event) => {

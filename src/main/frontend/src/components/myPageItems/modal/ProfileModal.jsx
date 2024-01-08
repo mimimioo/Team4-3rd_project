@@ -2,10 +2,10 @@ import React, {useContext} from 'react';
 import styled from "styled-components";
 import ModalLayout from "./ModalLayout";
 import ProfileImage from "../profileItems/ProfileImage";
-import UserContext from "../../../context/user/UserContext";
+import {useSelector} from "react-redux";
 
 const ProfileModal = () => {
-    const {userInfo, dispatchUserInfo} = useContext(UserContext);
+    const userInfo = useSelector(state => state.user)
 
     return (
         <ModalLayout>

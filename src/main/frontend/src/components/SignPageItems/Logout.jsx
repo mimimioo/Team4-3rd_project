@@ -1,22 +1,25 @@
 import React, {useContext, useEffect} from 'react';
-import LoginContext from "../../context/user/LoginContext";
-import UserContext from "../../context/user/UserContext";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {DELETE_USER_INFO} from "../../redux/userSlice";
+import {SET_LOGOUT} from "../../redux/loginSlice";
 
 
 const Logout = () => {
-    const { isLogin, dispatchLogin } = useContext(LoginContext);
-    const { userInfo, dispatchUserInfo } = useContext(UserContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const isLogin = useSelector((state) => state.login.isLogin);
 
     const requestLogout = async () => {
         try {
+            // 로그아웃 시, 기존 쿠키에 설정된 JWT 없애기 위해, 서버에 로그아웃 요청을 보냄
+            // 서버에서는 쿠키 만료 설정하여 반환함
             const response = await axios.post('http://192.168.85.252:8080/user/logout');
             const result = response.data || "데이터가 비어있음";
             if (result.result === true) {
-                dispatchUserInfo({ type: "LOGOUT" })
-                dispatchLogin({ type: "LOGOUT" })
+                dispatch(DELETE_USER_INFO());
+                dispatch(SET_LOGOUT());
                 navigate("/");
             }
         } catch (error) {

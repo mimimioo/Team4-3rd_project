@@ -11,7 +11,7 @@ const userSlice = createSlice({
         userProfileImg: localStorage.getItem('userProfileImg') || '/image/baseProfile.png',
     },
     reducers: {
-        login: (state, action) => {
+        SET_USER_INFO: (state, action) => {
             localStorage.setItem('userName', action.payload.userName);
             localStorage.setItem('userEmail', action.payload.userEmail);
             localStorage.setItem('userPhone', action.payload.userPhone);
@@ -20,7 +20,7 @@ const userSlice = createSlice({
             localStorage.setItem('userProfileImg', action.payload.userProfileImg);
             return action.payload;
         },
-        logout: (state) => {
+        DELETE_USER_INFO: (state) => {
             localStorage.removeItem('userName');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userPhone');
@@ -32,6 +32,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { SET_USER_INFO, DELETE_USER_INFO } = userSlice.actions;
 
 export default userSlice.reducer

@@ -3,12 +3,12 @@ import styled from "styled-components";
 import ProfileModal from "./modal/ProfileModal";
 import UserInfoModal from "./modal/UserInfoModal";
 import ModalBaseLayout from "./modal/ModalBaseLayout";
-import UserContext from "../../context/user/UserContext";
+import {useSelector} from "react-redux";
 
 
 const MyInfo = () => {
     const [currentModal, setCurrentModal] = useState(false);
-    const {userInfo, dispatchUserInfo} = useContext(UserContext);
+    const userInfo = useSelector(state => state.user)
 
     return (
         <Layout>

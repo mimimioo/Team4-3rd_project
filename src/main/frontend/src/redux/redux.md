@@ -31,8 +31,8 @@
 - 컴포넌트에서 store에 접근하는 가장 쉬운 방법은 useSelector()를 활용하는 것입니다.
 - 사용 예시) const mySliceState = useSelector((state) => state.mySliceName);
 - useSelector 는 store 에 접근하는 훅으로 state 는 store 에서 관리되는 상태 변수들을 나타내며,
-- state.<상태변수이름> 으로 store 의 변수에 접근이 가능합니다.
-- loginSilce.js 기준으로는 state.login
+- state.<store.js에 등록된 리듀서함수 이름 또는 리듀서 함수 키값> 으로 store 의 변수에 접근이 가능합니다.
+- 현재 store.js 기준으로는 state.login.<loginSilce.js의 상태값 이름>
 
 ### 6. 리덕스 상태값 업데이트를 위한 hook, *useDispatch()*
 - *const dispatch = useDispatch();* 을 통해 *dispatch* 를 가져올 수 있습니다.

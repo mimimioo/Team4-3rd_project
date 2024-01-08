@@ -1,8 +1,8 @@
 
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import LoginContext from "../../context/user/LoginContext";
+import {useSelector} from "react-redux";
 
 const StyledNav = styled.nav`
   background-color: transparent;
@@ -51,8 +51,9 @@ const StyledLink = styled(Link)`
 
 
 const Nav = () => {
-    const {isLogin, dispatchLogin} = useContext(LoginContext);
-    console.log(isLogin);
+    const isLogin = useSelector((state) => state.login.isLogin);
+    console.log(isLogin)
+
 
     return (
         <StyledNav>
