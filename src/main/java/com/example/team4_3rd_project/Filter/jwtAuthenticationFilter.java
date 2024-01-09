@@ -24,7 +24,7 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
         // 요청 헤더에서 Authorization를 얻어옴
         String receiveToken = request.getHeader("Authorization");
         // receiveToken이 Authorization가 jwt 방식이 아닌 경우
-        if (receiveToken == null || !receiveToken.startsWith("Bearer ")) {
+        if (receiveToken == null || !receiveToken.startsWith("Bearer")) {
             System.out.println("filterChain.doFilter(request, response) 직전");
             filterChain.doFilter(request, response);
             System.out.println("filterChain.doFilter(request, response) 직후");

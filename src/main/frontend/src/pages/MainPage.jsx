@@ -7,6 +7,7 @@ import Nav from '../components/Nav/Nav';
 import SeaApi from '../components/API/SeaApi';
 
 const Main = () => {
+
   return (
     <StyledContainer>
       <BackgroundVideo />

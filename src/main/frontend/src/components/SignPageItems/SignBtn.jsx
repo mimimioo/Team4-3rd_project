@@ -2,24 +2,22 @@ import React, {useContext} from 'react';
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../../context/user/AuthContext";
-import LoginContext from "../../context/user/LoginContext";
-import UserContext from "../../context/user/UserContext";
+import {useDispatch} from "react-redux";
+import {SET_USER_INFO} from "../../redux/userSlice";
+import {SET_LOGIN} from "../../redux/loginSlice";
 
 const SignBtn = (props) => {
-    const {token, dispatchToken} = useContext(AuthContext);
-    const {isLogin, dispatchLogin} = useContext(LoginContext);
-    const {userInfo, dispatchUserInfo} = useContext(UserContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     let requestFun;
     if(props.request === "signIn")
     {
-        requestFun = async () => {props.result(await requestSignIn(props.id, props.pw, dispatchToken, dispatchLogin,dispatchUserInfo))}
+        requestFun = async () => {props.result(await requestSignIn(props.id, props.pw))}
     }
     else if(props.request === "signUp")
         requestFun = async () => {props.result(await requestSignUp(props.id, props.pw, props.cpw, props.name, props.nickName, props.phoneNum))}
 
-    const  requestSignIn = async (id, pw, setToken, setIsLogin, setUserInfo) => {
+    const  requestSignIn = async (id, pw, setIsLogin, setUserInfo) => {
         console.log("비동기 함수 실행")
         try {
             const response = await axios.post('http://192.168.85.252:8080/user/login', {
@@ -27,21 +25,15 @@ const SignBtn = (props) => {
                 password : pw,
             });
             console.log('Login Successful', response.data);
-            dispatchToken({
-                type : "LOGIN",
-                token : response.data.token
-            })
-            dispatchLogin({type : "LOGIN"});
-            dispatchUserInfo({
-                type : "LOGIN",
-                userInfo : {
+            dispatch(SET_LOGIN());
+            dispatch(SET_USER_INFO({
                     userName: response.data.userDto.username,
                     userEmail: response.data.userDto.email,
                     userPhone: response.data.userDto.phoneNum,
                     userNickname: response.data.userDto.nickname,
-                    userIntroduce: response.data.userDto.userIntroduce
-                }
-            })
+                    userIntroduce: response.data.userDto.userIntroduce,
+                    userProfileImg: response.data.userDto.userProfileImg||"/image/baseProfile.png"
+            }))
             navigate(-1);
             return response.data;
         } catch (error) {

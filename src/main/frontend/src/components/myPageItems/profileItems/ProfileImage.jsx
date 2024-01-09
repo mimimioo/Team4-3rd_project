@@ -1,29 +1,36 @@
-import React, {useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import styled from "styled-components";
+import { uploadProfileImage } from '../../firebase/UploadImage';
+import {useSelector} from "react-redux";
+
 
 const ProfileImage = () => {
     const fileInputRef = useRef(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const userInfo = useSelector(state => state.user)
+    const [imageUrl, setImageUrl] = useState(null);
+
     const addImage = (event) => {
         event.preventDefault();
         fileInputRef.current.click();
     }
-    const handleFileChange = (event) => {
+    const handleFileChange = async (event) => {
         const selectedFile = event.target.files[0];
 
         if (selectedFile) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setSelectedImage(e.target.result);
-            };
-            console.log(selectedFile);
-            reader.readAsDataURL(selectedFile);
+            try {
+                setImageUrl(await uploadProfileImage(selectedFile, userInfo.userEmail));
+                console.log('Image URL:', imageUrl);
+                setSelectedImage(imageUrl);
+            } catch (error) {
+                console.error('Image upload failed:', error);
+            }
         }
     };
 
     return (
         <ImageWrapper>
-            {selectedImage? <Image src={selectedImage} /> : <Image />}
+            <Image src={userInfo.userProfileImg}/>
             <EditImageBtn onClick={addImage}/>
             <InputImage
                 type={"file"}
@@ -39,7 +46,6 @@ const ImageWrapper = styled.div`
   position: relative;
 `
 const Image = styled.img`
-  border: 1px solid #000;
   width: 100px;
   max-width: 200px;
   height: 100px;
@@ -50,13 +56,13 @@ const InputImage = styled.input`
 `
 const EditImageBtn = styled.button`
   outline: none;
-  border: none;
+  border: 2px solid #000;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   position: absolute;
   top: 65%;
   left: 65%;
-  background-color: dodgerblue;
+  background: url("/image/picture_icon.png") center/cover no-repeat #fff;
   cursor: pointer;
 `

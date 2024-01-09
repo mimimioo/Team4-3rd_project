@@ -1,16 +1,19 @@
 import React from 'react';
 import styled from "styled-components";
+import UserInfoModal from "./UserInfoModal";
+import ProfileModal from "./ProfileModal";
 
 const ModalBaseLayout = (props) => {
     const modalControl = (event) => {
         if(event.target === event.currentTarget) {
-            props.setCurrentModal(false)
+            props.setCurrentModal("")
         }
     }
 
     return (
         <Layout onClick={modalControl}>
-            {props.currentModal}
+            {props.currentModal==="ProfileModal" && <ProfileModal />}
+            {props.currentModal==="UserInfoModal" && <UserInfoModal />}
         </Layout>
     );
 };
