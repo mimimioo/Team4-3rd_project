@@ -19,4 +19,4 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 // Storage에 대한 기본 참조 생성
-export const storageRef = ref(storage);
+ export const storageRef = ref(storage);

@@ -10,6 +10,7 @@ import LoginProvider from "./provider/user/LoginProvider";
 import UserProvider from "./provider/user/UserProvider";
 import Logout from "./components/SignPageItems/Logout";
 import MyPage from "./pages/MyPage";
+import axios from 'axios';
 
 function App() {
 
