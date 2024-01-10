@@ -4,6 +4,7 @@ import BackgroundVideo from "../components/BackgroundVideo";
 import SignPageLayout from "../components/SignPageItems/SignPageLayout";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import Nav from "../components/Nav/Nav";
 
 const SignInPage = () => {
     const isLogin = useSelector(state => state.login.isLogin)
@@ -14,10 +15,15 @@ const SignInPage = () => {
         }
     }, [isLogin]);
     return (
-        <SignPageLayout>
-            <BackgroundVideo />
-            <SignInBox />
-        </SignPageLayout>
+        <>
+            <SignPageLayout>
+                <BackgroundVideo />
+                <Nav />
+                <div className="signInBox">
+                    <SignInBox />
+                </div>
+            </SignPageLayout>
+        </>
     );
 };
 export default SignInPage;
