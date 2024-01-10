@@ -1,28 +1,68 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import ModalLayout from "./ModalLayout";
 import ProfileImage from "../profileItems/ProfileImage";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import axios from "axios";
+import {UPDATE_USER_PROFILE, UPDATE_USER_PROFILE_NOT_IMAGE} from "../../../redux/userSlice";
 
-const ProfileModal = () => {
+const ProfileModal = (props) => {
+    const BASE_IMG_ADDRESS = "https://firebasestorage.googleapis.com/v0/b/team-project-test-k14-4.appspot.com/o/propfileImg%2FbaseProfile.png?alt=media&token=fe92656d-30c9-4c0c-8164-17b840bfc232";
     const userInfo = useSelector(state => state.user)
+    const [imgAddress, setImgAddress] = useState(userInfo.userProfileImg);
+    const inputNickNameRef = useRef();
+    const inputIntroduceRef = useRef();
+    const dispatch = useDispatch();
+
+    const axiosData = async () => {
+        const requestNickname = inputNickNameRef.current.value;
+        const requestIntroduce = inputIntroduceRef.current.value;
+        const requestImgAddress = imgAddress===BASE_IMG_ADDRESS? null : imgAddress;
+        try {
+            const response = await axios.post('/user/info/update', {
+                nickname: requestNickname,
+                userIntroduce: requestIntroduce,
+                userProfileImg: requestImgAddress,
+            }, {withCredentials : true})
+            if(response.data.result === true) {
+                requestImgAddress ?
+                    dispatch(UPDATE_USER_PROFILE({
+                        userNickname: response.data.userDto.nickname,
+                        userIntroduce: response.data.userDto.userIntroduce,
+                        userProfileImg: response.data.userDto.userProfileImg}))
+                    :dispatch(UPDATE_USER_PROFILE_NOT_IMAGE({
+                        userNickname: response.data.userDto.nickname,
+                        userIntroduce: response.data.userDto.userIntroduce}))
+            }
+        } catch (e) {
+            console.log(`error!!`, e)
+        }
+    }
+
+    const updateProfile = async (e) => {
+        e.preventDefault();
+        axiosData()
+            .then(() => {
+                props.setCurrentModal(null);
+            })
+    }
 
     return (
         <ModalLayout>
             <h3 style={{margin: "15px auto", fontSize:"19px"}}>프로필 수정</h3>
             <EditForm>
                 <RowBox>
-                    <ProfileImage />
+                    <ProfileImage imgAddress={imgAddress} setImgAddress={setImgAddress}/>
                     <ColumnBox>
                         <Text>{userInfo.userName}님 반갑습니다.</Text>
                         <Text>닉네임</Text>
-                        <Input type={"text"} name={"NickName"} defaultValue={userInfo.userNickname || ""} />
+                        <Input ref={inputNickNameRef} type={"text"} name={"NickName"} defaultValue={userInfo.userNickname || ""} />
                     </ColumnBox>
                 </RowBox>
                 <ColumnBox>
                     <Text>소개글</Text>
-                    <TextArea defaultValue={userInfo.userIntroduce || ""} />
-                    <Btn>수정하기</Btn>
+                    <TextArea ref={inputIntroduceRef} defaultValue={userInfo.userIntroduce || ""} />
+                    <Btn onClick={updateProfile}>수정하기</Btn>
                 </ColumnBox>
             </EditForm>
         </ModalLayout>

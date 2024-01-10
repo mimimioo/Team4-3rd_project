@@ -13,7 +13,7 @@ const MyInfo = () => {
     return (
         <Layout>
             <RowFlexLayout1>
-                <ProfileImage />
+                <ProfileImage src={userInfo.userProfileImg}/>
                 <ProfileInfoLayout>
                     <ProfileHeader>닉네임 : {userInfo.userNickname}</ProfileHeader>
                     <ProfileHeader>소개글</ProfileHeader>
@@ -53,7 +53,6 @@ const RowFlexLayout2 = styled.div`
   height: 150px;
 `
 const ProfileImage = styled.img`
-  background-color: #ff6363;
   width: 200px;
   min-width: 200px;
   height: 200px;

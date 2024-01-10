@@ -20,26 +20,27 @@ const SignBtn = (props) => {
     const  requestSignIn = async (id, pw, setIsLogin, setUserInfo) => {
         console.log("비동기 함수 실행")
         try {
-            const response = await axios.post('http://192.168.85.252:8080/user/login', {
+            const response = await axios.post("/user/login", {
                 email : id,
                 password : pw,
             });
-            console.log('Login Successful', response.data);
-            dispatch(SET_LOGIN());
-            dispatch(SET_USER_INFO({
+            if(response.data.result) {
+                dispatch(SET_LOGIN());
+                dispatch(SET_USER_INFO({
                     userName: response.data.userDto.username,
                     userEmail: response.data.userDto.email,
                     userPhone: response.data.userDto.phoneNum,
                     userNickname: response.data.userDto.nickname,
                     userIntroduce: response.data.userDto.userIntroduce,
-                    userProfileImg: response.data.userDto.userProfileImg||"/image/baseProfile.png"
-            }))
-            navigate(-1);
+                    userProfileImg: response.data.userDto.userProfileImg||"https://firebasestorage.googleapis.com/v0/b/team-project-test-k14-4.appspot.com/o/propfileImg%2FbaseProfile.png?alt=media&token=fe92656d-30c9-4c0c-8164-17b840bfc232"
+                }))
+                navigate(-1);
+            } else {
+                alert("아이디와 비밀번호를 다시 확인해주세요.")
+            }
             return response.data;
         } catch (error) {
-            alert("아이디와 비밀번호를 다시 확인해주세요.")
-            console.error('Login Failed', error);
-            return null;
+            alert("인터넷 연결을 확인해주세요.")
         }
     }
     const  requestSignUp = async (id, pw, cpw, name, nickName, phoneNum) => {
@@ -51,7 +52,7 @@ const SignBtn = (props) => {
         else
             try {
                 console.log(`요청 전 데이터 확인, 아이디 : ${id} + 비밀번호 : ${pw}`)
-                const response = await axios.post('http://192.168.85.252:8080/user/register', {
+                const response = await axios.post('/user/register', {
                     email : id,
                     password : pw,
                     username : name,
@@ -66,7 +67,7 @@ const SignBtn = (props) => {
                 const result = {
                     message : "회원가입에 실패했습니다."
                 }
-                console.error('Login Failed', error);
+                console.log(error);
                 return result;
             }
     }

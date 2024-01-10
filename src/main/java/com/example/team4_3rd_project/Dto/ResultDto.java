@@ -11,6 +11,7 @@ public class ResultDto {
     public Boolean result;
     public String message;
     public UserDto userDto;
+    public String token;
 
     public List<BoardItemDto> boardItemDtos;
 }

@@ -4,11 +4,9 @@ import { uploadProfileImage } from '../../firebase/UploadImage';
 import {useSelector} from "react-redux";
 
 
-const ProfileImage = () => {
+const ProfileImage = (props) => {
     const fileInputRef = useRef(null);
-    const [selectedImage, setSelectedImage] = useState(null);
     const userInfo = useSelector(state => state.user)
-    const [imageUrl, setImageUrl] = useState(null);
 
     const addImage = (event) => {
         event.preventDefault();
@@ -19,9 +17,7 @@ const ProfileImage = () => {
 
         if (selectedFile) {
             try {
-                setImageUrl(await uploadProfileImage(selectedFile, userInfo.userEmail));
-                console.log('Image URL:', imageUrl);
-                setSelectedImage(imageUrl);
+                props.setImgAddress(await uploadProfileImage(selectedFile, userInfo.userEmail));
             } catch (error) {
                 console.error('Image upload failed:', error);
             }
@@ -30,7 +26,7 @@ const ProfileImage = () => {
 
     return (
         <ImageWrapper>
-            <Image src={userInfo.userProfileImg}/>
+            <Image src={props.imgAddress}/>
             <EditImageBtn onClick={addImage}/>
             <InputImage
                 type={"file"}
