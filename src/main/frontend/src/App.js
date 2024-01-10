@@ -7,6 +7,7 @@ import SignUpPage from "./pages/SignUpPage";
 import UsedMarket from "./pages/UsedMarket";
 import Logout from "./components/SignPageItems/Logout";
 import MyPage from "./pages/MyPage";
+import CommunityForm from "./pages/CommunityForm";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="/main" element={<Main />}></Route>
             <Route path="/test" element={<Test />}></Route>
             <Route path="/Community" element={<Community />}></Route>
+            <Route path="/CommunityForm" element={<CommunityForm />}></Route>
             <Route path="/login" element={<SignInPage />}></Route>
             <Route path="/signup" element={<SignUpPage />}></Route>
             <Route path="/logout" element={<Logout />}></Route>

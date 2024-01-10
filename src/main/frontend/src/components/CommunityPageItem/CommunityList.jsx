@@ -19,8 +19,8 @@ const StyledCommunityList = styled.div`
     margin-right: 10px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* 테두리를 둥글게 만듦 */
-    background-color: #f8f8f8; /* 배경색 설정 */
+    border-radius: 5px;
+    background-color: #f8f8f8;
   }
   
   strong {
@@ -31,7 +31,12 @@ const StyledCommunityList = styled.div`
     text-align: center; 
   }
 `;
+
 const CommunityList = ({ posts }) => {
+  const handleWritePostClick = () => {
+    // 글 작성 버튼이 클릭시 이동하는 경로.
+    window.location.href = '/CommunityForm';
+  };
   return (
       <StyledCommunityList>
     <div>
@@ -45,7 +50,9 @@ const CommunityList = ({ posts }) => {
         ))}
       </ul>
     </div>
+        <button onClick={handleWritePostClick}>글 작성</button>
       </StyledCommunityList>
+
   );
 };
 
