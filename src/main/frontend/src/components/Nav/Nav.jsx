@@ -3,12 +3,11 @@ import React, {useRef} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import {useSelector} from "react-redux";
-import '../../nav.css';
 
 const StyledNav = styled.nav`
   width: 100%;
   background-color: #222;
-  padding: 30px 5%;
+  padding: 15px 5%;
   text-align: center;
   display: flex;
   justify-content: space-between; /* 좌우 간격을 최대로 설정 */
@@ -27,6 +26,7 @@ const StyledText = styled(Link)`
 `;
 
 const StyledLinkContainerLeft = styled.div`
+  width: 30%;
   gap: 5%;
 `;
 
@@ -42,7 +42,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-family: 'OA';
   white-space: nowrap;
-  font-size: 1.2rem;
+  font-size: 1rem;
 
   &:hover {
     //text-decoration: underline;
@@ -78,7 +78,6 @@ const Nav = () => {
 
 
     return (
-        <div className="mainContainer">
             <StyledNav>
                 <StyledLinkContainerLeft>
                     {/*    <StyledLink to="#">선상예약</StyledLink>    */}
@@ -98,30 +97,9 @@ const Nav = () => {
                 <StyledLinkContainerRight>
                     <StyledLink to="#" className="findingFishingSpot">낚시터찾기</StyledLink>
                     {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"} className="login">로그인</StyledLink>}
-                    {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
+                    {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : null}
                 </StyledLinkContainerRight>
             </StyledNav>
-
-            <div className="styledContainer">
-                <div id="main">메인</div>
-                <div id="reserve">선상예약</div>
-                <div id="community">
-                    {/*<Community01 />*/}
-                    {/*<Community02 />*/}
-                </div>
-                <div id="secondhand">중고마켓</div>
-                <div id="notice">공지사항</div>
-            </div>
-            {/*    @@.styledContainer 종료@@    */}
-
-            <div className="styledFooter">
-                <p><strong>(주)낚시의민족낚았소</strong></p>
-                <p>문의 | contact@it4.io</p>
-                <p>© Copyrights IT4 corp.</p>
-            </div>
-            {/*    @@.styledFooter 종료@@    */}
-        </div>
-        // <!--    @@.mainContainer 종료@@    -->
     );
 };
 
