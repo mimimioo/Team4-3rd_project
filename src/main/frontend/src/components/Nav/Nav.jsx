@@ -1,16 +1,20 @@
 
-import React from 'react';
+import React, {useRef} from 'react';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import {useSelector} from "react-redux";
+import '../../nav.css';
 
 const StyledNav = styled.nav`
-  background-color: transparent;
+  width: 100%;
+  background-color: #222;
   padding: 30px 5%;
   text-align: center;
   display: flex;
   justify-content: space-between; /* 좌우 간격을 최대로 설정 */
   align-items: center;
+  position: fixed;
+  z-index: 100;
 `;
 
 const StyledText = styled(Link)`
@@ -23,12 +27,9 @@ const StyledText = styled(Link)`
 `;
 
 const StyledLinkContainerLeft = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 30%;
   gap: 5%;
 `;
+
 const StyledLinkContainerRight = styled.div`
   display: flex;
   align-items: center;
@@ -38,38 +39,89 @@ const StyledLinkContainerRight = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: white;
   text-decoration: none;
   font-family: 'OA';
   white-space: nowrap;
   font-size: 1.2rem;
 
   &:hover {
-    text-decoration: underline;
+    //text-decoration: underline;
+    color: #fff;
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
   }
 `;
+
 
 
 const Nav = () => {
     const isLogin = useSelector((state) => state.login.isLogin);
     console.log(isLogin)
 
+    const reserveRef = useRef<HTMLDivElement>(null);
+    const communityRef = useRef<HTMLDivElement>(null);
+    const secondhandRef = useRef<HTMLDivElement>(null);
+    const noticeRef = useRef<HTMLDivElement>(null);
+    const onReserveClick = () => {
+        reserveRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    const onCommunityClick = () => {
+        communityRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    const onSecondhandClick = () => {
+        secondhandRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    const onNoticeClick = () => {
+        noticeRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+
 
     return (
-        <StyledNav>
-          <StyledLinkContainerLeft>
-            <StyledLink to="#">선상예약</StyledLink>
-            <StyledLink to="/Community">커뮤니티</StyledLink>
-            <StyledLink to="/UsedMarket">중고마켓</StyledLink>
-            <StyledLink to="#">공지사항</StyledLink>
-          </StyledLinkContainerLeft>
-            <StyledText to={"/"}>낚시의민족낚았소</StyledText>
-            <StyledLinkContainerRight>
-                <StyledLink to="#">낚시터찾기</StyledLink>
-                {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"}>로그인</StyledLink>}
-                {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : null}
-          </StyledLinkContainerRight>
-        </StyledNav>
+        <div className="mainContainer">
+            <StyledNav>
+                <StyledLinkContainerLeft>
+                    {/*    <StyledLink to="#">선상예약</StyledLink>    */}
+                    {/*    <StyledLink to="/Community">커뮤니티</StyledLink>    */}
+                    {/*    <StyledLink to="/UsedMarket">중고마켓</StyledLink>    */}
+                    {/*    <StyledLink to="#">공지사항</StyledLink>    */}
+                    <ul className="styledLinkContainerLeft">
+                        <li className="reserve"><a href='#reserve'>선상예약</a></li>
+                        <li className="community"><a href='#community'>커뮤니티</a></li>
+                        <li className="secondhand"><a href='#secondhand'>중고마켓</a></li>
+                        <li className="notice"><a href='#notice'>공지사항</a></li>
+                    </ul>
+                </StyledLinkContainerLeft>
+
+                <StyledText to={"/"} className="styledTitle">낚시의민족낚았소</StyledText>
+
+                <StyledLinkContainerRight>
+                    <StyledLink to="#" className="findingFishingSpot">낚시터찾기</StyledLink>
+                    {isLogin? <StyledLink to={"/mypage"}>마이페이지</StyledLink> : <StyledLink to={"/login"} className="login">로그인</StyledLink>}
+                    {isLogin? <StyledLink to={"/logout"}>로그아웃</StyledLink> : false}
+                </StyledLinkContainerRight>
+            </StyledNav>
+
+            <div className="styledContainer">
+                <div id="main">메인</div>
+                <div id="reserve">선상예약</div>
+                <div id="community">
+                    {/*<Community01 />*/}
+                    {/*<Community02 />*/}
+                </div>
+                <div id="secondhand">중고마켓</div>
+                <div id="notice">공지사항</div>
+            </div>
+            {/*    @@.styledContainer 종료@@    */}
+
+            <div className="styledFooter">
+                <p><strong>(주)낚시의민족낚았소</strong></p>
+                <p>문의 | contact@it4.io</p>
+                <p>© Copyrights IT4 corp.</p>
+            </div>
+            {/*    @@.styledFooter 종료@@    */}
+        </div>
+        // <!--    @@.mainContainer 종료@@    -->
     );
 };
 
