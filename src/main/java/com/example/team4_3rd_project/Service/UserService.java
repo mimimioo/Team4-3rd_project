@@ -1,6 +1,7 @@
 package com.example.team4_3rd_project.Service;
 
 import com.example.team4_3rd_project.Dto.ResultDto;
+import com.example.team4_3rd_project.Dto.UserDto;
 import com.example.team4_3rd_project.Entity.UserEntity;
 import com.example.team4_3rd_project.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
-
-import static com.example.team4_3rd_project.Utils.JwtTokenUtil.generateToken;
 
 @Service
 @Transactional
@@ -38,6 +37,21 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         return true;
+    }
+    public UserDto updateUser(UserEntity user) {
+        UserEntity userEntity = new UserEntity();
+        userRepository.updateUser(user.getNickname(), user.getUserIntroduce(), user.getUserProfileImg() ,user.getEmail());
+        Optional<UserEntity> OpUserEntity = userRepository.findByEmail(user.getEmail());
+        if(OpUserEntity.isPresent()) {
+            userEntity = OpUserEntity.get();
+        }
+
+        return UserEntity.changeToDto(userEntity);
+    }
+
+    public int deleteUser(String email){
+
+        return userRepository.deleteByEmail(email);
     }
 
     public ResultDto loginUser(UserEntity userEntity) {

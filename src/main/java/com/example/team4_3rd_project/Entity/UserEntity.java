@@ -23,6 +23,8 @@ public class UserEntity {
     private String nickname;
     private String phoneNum;
     private String userIntroduce;
+    @Lob
+    private String userProfileImg;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -36,6 +38,7 @@ public class UserEntity {
         userEntity.setNickname(userDto.getNickname());
         userEntity.setUserIntroduce(null);
         userEntity.setRole(Role.USER);
+        userEntity.setUserProfileImg(userDto.getUserProfileImg());
         return userEntity;
     }
     public static UserDto changeToDto(UserEntity userEntity) {
