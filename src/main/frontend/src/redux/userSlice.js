@@ -29,9 +29,27 @@ const userSlice = createSlice({
             localStorage.removeItem('userProfileImg');
             return {};
         },
+        UPDATE_USER_PROFILE: (state, action) => {
+            localStorage.setItem('userNickname', action.payload.userNickname);
+            localStorage.setItem('userIntroduce', action.payload.userIntroduce);
+            localStorage.setItem('userProfileImg', action.payload.userProfileImg);
+
+            return {...state,
+                userNickname: action.payload.userNickname,
+                userProfileImg: action.payload.userProfileImg,
+                userIntroduce: action.payload.userIntroduce,};
+        },
+        UPDATE_USER_PROFILE_NOT_IMAGE: (state, action) => {
+            localStorage.setItem('userNickname', action.payload.userNickname);
+            localStorage.setItem('userIntroduce', action.payload.userIntroduce);
+
+            return {...state,
+                userNickname: action.payload.userNickname,
+                userIntroduce: action.payload.userIntroduce,};
+        },
     },
 });
 
-export const { SET_USER_INFO, DELETE_USER_INFO } = userSlice.actions;
+export const { SET_USER_INFO, DELETE_USER_INFO, UPDATE_USER_PROFILE, UPDATE_USER_PROFILE_NOT_IMAGE } = userSlice.actions;
 
 export default userSlice.reducer

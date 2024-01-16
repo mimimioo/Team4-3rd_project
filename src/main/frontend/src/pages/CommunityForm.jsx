@@ -1,8 +1,11 @@
 import React, { useState }  from 'react';
 import BackgroundVideo from "../components/BackgroundVideo";
-import PostList from '../components/CommunityPageItem/CommunityList';
+import CommunityToastEditor from '../components/CommunityPageItem/CommunityToastEditor'
 import Nav from "../components/Nav/Nav";
 import styled from 'styled-components';
+
+
+
 
 const StyledContentWrapper = styled.div`
   position: relative;
@@ -16,20 +19,9 @@ const StyledContentWrapper = styled.div`
 
 
 const CommunityForm = () => {
-    const [posts, setPosts] = useState([
-        { id: 1, title: '더미1', content: '더미 내용1' },
-        { id: 2, title: '더미2', content: '더미 내용2' },
-    ]);
 
-    const [newPost, setNewPost] = useState({ title: '', content: '' });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewPost({
-            ...newPost,
-            [name]: value,
-        });
-    };
+
 
 
     return (
@@ -37,8 +29,9 @@ const CommunityForm = () => {
             <BackgroundVideo />
             <Nav/>
             <StyledContentWrapper>
-            <h1>Community</h1>
-                <PostList posts={posts} />
+            <h1>글작성</h1>
+                <CommunityToastEditor />
+                <button>작성</button>
                 </StyledContentWrapper>
         </div>
     );

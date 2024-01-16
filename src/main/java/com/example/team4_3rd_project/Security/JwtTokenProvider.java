@@ -20,8 +20,7 @@ public class JwtTokenProvider {
     public Authentication validateToken(String token) throws Exception {
         String clientToken = token;
         System.out.println(clientToken);
-        token = token.replace("Bearer ", "");
-        String userEmail = JwtTokenUtil.checkJwt(token).get("userEmail").toString();
+        String userEmail = JwtTokenUtil.checkJwt(clientToken).get("userEmail").toString();
         Optional<UserEntity> findAuthority = userRepository.findByEmail(userEmail);
         String authority = findAuthority.orElse(null).getRole().toString();
 

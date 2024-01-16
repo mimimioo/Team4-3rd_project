@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 import static com.example.team4_3rd_project.Utils.JwtTokenUtil.generateToken;
 
 @RestController
@@ -48,13 +50,16 @@ public class UserController {
         ResultDto resultDto = userService.loginUser(user);
         if(resultDto.result) {
             System.out.println("로그인 성공");
+            System.out.println("유저 이메일 : " + user.getEmail());
             String token = "Bearer" + generateToken(user.getEmail());
             System.out.println(token);
 
             Cookie cookie = new Cookie("Authorization", token);
             cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            cookie.setAttribute("SameSite", "None");
             cookie.setMaxAge(60 * 60 * 24);
-            response.addCookie(cookie);;
+            response.addCookie(cookie);
         }
         return resultDto;
     }
@@ -73,9 +78,31 @@ public class UserController {
     }
 
     @PostMapping("info/update")
-    public ResultDto updateUser() {
+    public ResultDto updateUser(@RequestBody UserDto userDto, Principal principal) {
         ResultDto resultDto = new ResultDto();
+        userDto.setEmail(principal.getName());
+        UserEntity userEntity = UserDto.changeToEntity(userDto);
+        resultDto.setUserDto(userService.updateUser(userEntity));
 
+        resultDto.result=true;
+
+        return resultDto;
+    }
+
+    @PostMapping("/deleteUser")
+    public ResultDto deleteUser(Principal principal, HttpServletResponse response) {
+        ResultDto resultDto = new ResultDto();
+        if(userService.deleteUser(principal.getName())==1) {
+            resultDto.setResult(true);
+            resultDto.setMessage("탈퇴되었습니다.");
+        } else {
+            resultDto.setResult(false);
+            resultDto.setMessage("탈퇴 요청에 실패했습니다. 관리자에게 문의해주세요.");
+        }
+
+        Cookie cookie = new Cookie("Authorization", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
 
         return resultDto;
     }

@@ -12,8 +12,8 @@ const ModalBaseLayout = (props) => {
 
     return (
         <Layout onClick={modalControl}>
-            {props.currentModal==="ProfileModal" && <ProfileModal />}
-            {props.currentModal==="UserInfoModal" && <UserInfoModal />}
+            {props.currentModal==="ProfileModal" && <ProfileModal setCurrentModal={props.setCurrentModal} />}
+            {props.currentModal==="UserInfoModal" && <UserInfoModal setCurrentModal={props.setCurrentModal}/>}
         </Layout>
     );
 };

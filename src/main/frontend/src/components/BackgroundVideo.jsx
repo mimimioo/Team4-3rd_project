@@ -7,19 +7,21 @@ const BackgroundVideo = () => {
         videoRef.current.playbackRate = 0.7;
     };
     return (
-        <BgcVideo>
-            <Video muted autoPlay ref={videoRef} onCanPlay={() => setPlayBackRate()}>
-                <source src={"./videos/fish.mp4"} type="video/mp4" />
-            </Video>
-            <BgcCover></BgcCover>
-        </BgcVideo>
+        <div className="mainBackground">
+            <BgcVideo>
+                <Video muted autoPlay ref={videoRef} onCanPlay={() => setPlayBackRate()}>
+                    <source src={"./videos/fish.mp4"} type="video/mp4" />
+                </Video>
+                <BgcCover></BgcCover>
+            </BgcVideo>
+        </div>
     );
 };
 export default BackgroundVideo;
 
 const BgcVideo = styled.div`
     position: fixed;
-    top: 0;
+    top: 70px;
     left: 0;
     width: 100%;
     height: 100%;
