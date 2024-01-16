@@ -17,9 +17,4 @@ const app = initializeApp(firebaseConfig);
 
 export const storage = getStorage(app);
 
-<<<<<<< HEAD
-// Storage에 대한 기본 참조 생성
- export const storageRef = ref(storage);
-=======
 export default storage;
->>>>>>> a5ce24168c72a099a63c2b720fbecdb10a7122b6

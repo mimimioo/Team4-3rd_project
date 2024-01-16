@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@toast-ui/editor": "^3.2.2",
+    "install": "^0.13.0",
     "react-player": "^2.14.1",
     "styled-components": "^6.1.3"
   }

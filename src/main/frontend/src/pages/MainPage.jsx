@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Nav from '../components/Nav/Nav';
-import SeaApi from '../components/API/SeaApi';
+
 
 const Main = () => {
 
@@ -13,7 +13,6 @@ const Main = () => {
       <BackgroundVideo />
       <Nav />
       <StyledSeaApiContainer>
-        <SeaApi />
       </StyledSeaApiContainer>
     </StyledContainer>
   );
